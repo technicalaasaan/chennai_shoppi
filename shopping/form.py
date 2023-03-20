@@ -17,5 +17,6 @@ class CustomerModelForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'cus_name': forms.TextInput(attrs={'class': 'form-control'})
+            'cus_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'})
         }

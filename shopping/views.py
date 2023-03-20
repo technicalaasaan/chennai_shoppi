@@ -8,10 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .form import CustomerForm, CustomerModelForm
 from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'name': 'Mohideen'})
 
 @csrf_exempt
 def customer(request): # function based view
@@ -57,3 +60,25 @@ class CustomerView(CreateView):
     form_class = CustomerModelForm
     template_name = 'customer.html'
     success_url = '/customer'
+
+
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name =  'customer_detail.html' # 'templates/shopping/customer_detail.html'
+
+class CustomerListView(ListView):
+    model = Customer
+    template_name =  'customer_detail.html' # 'templates/shopping/customer_list.html'
+
+class CustomerUpdateView(UpdateView):
+    model = Customer
+    fields = "__all__"
+    template_name = 'customer.html' # 'templates/shopping/customer_form.html'
+    success_url = '/customer'
+
+class CustomerDeleteView(DeleteView):
+    model = Customer
+    template_name = 'customer_delete.html'
+    success_url = '/customer'
+
+

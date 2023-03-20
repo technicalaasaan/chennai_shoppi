@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+</head>
+<body>
+    {% for object in object_list %}
+     <li> {{ object.cus_name }}</li>
+     <li> {{ object.address }} </li>
+    <hr/>
+    {% endfor %}
+<!--    # detailed view-->
+<!--    <h1> {{ object.cus_name }} </h1>-->
+<!--    <h2> {{ object.address }} </h2>-->
+</body>
+</html>
