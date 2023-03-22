@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shopping.views import home, customer, customer_view, CustomerView, CustomerDeleteView, CustomerDetailView, CustomerListView, CustomerUpdateView
+from django.conf import settings
+from django.conf.urls.static import static
+from shopping.views import home, Browse, customer, customer_view, CustomerView, CustomerDeleteView, CustomerDetailView, CustomerListView, CustomerUpdateView
 
 urlpatterns = [
     path('', home),
+    path('browse/', Browse.as_view(), name='browse'),
     path('customer', customer),
     path('customer/<pk>/', CustomerDetailView.as_view()),
     path('customer/<pk>/update', CustomerUpdateView.as_view()),
@@ -28,5 +31,4 @@ urlpatterns = [
     path('customer_add/', CustomerView.as_view()),
     path('admin/', admin.site.urls),
 ]
-
-# urlpatterns += []
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

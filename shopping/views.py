@@ -7,14 +7,17 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .form import CustomerForm, CustomerModelForm
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html', {'name': 'Mohideen'})
+    return render(request, 'shopping/home.html', {'name': 'Mohideen'})
+
+class Browse(TemplateView):
+    template_name = 'shopping/browse.html'
 
 @csrf_exempt
 def customer(request): # function based view
