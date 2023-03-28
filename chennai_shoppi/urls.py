@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from shopping.views import home, Browse, customer, customer_view, CustomerView, CustomerDeleteView, CustomerDetailView, CustomerListView, CustomerUpdateView
+from shopping.views import home, login, logout, Browse, customer, customer_view, CustomerView, CustomerDeleteView, CustomerDetailView, CustomerListView, CustomerUpdateView
 
 urlpatterns = [
     path('', home),
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
     path('browse/', Browse.as_view(), name='browse'),
     path('customer', customer),
     path('customer/<pk>/', CustomerDetailView.as_view()),

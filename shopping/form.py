@@ -11,6 +11,12 @@ class CustomerForm(forms.Form):
     state = forms.ChoiceField(choices=states)
     dob = forms.DateField()
 
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+
+
 class CustomerModelForm(forms.ModelForm):
     class Meta:
         model = Customer

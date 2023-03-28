@@ -1,22 +1,39 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, resolve_url
 from .models import Customer
 from django.http import JsonResponse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .models import Product
-from .form import CustomerForm, CustomerModelForm
+from .form import CustomerForm, CustomerModelForm #, LoginForm
 from django.views.generic import CreateView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 # Create your views here.
 def home(request):
+    print('request', request.user.is_authenticated)
     data = Product.objects.all()
     return render(request, 'shopping/home.html', {'name': 'Mohideen', 'data': data})
+
+def logout(request):
+    auth_logout(request)
+    return redirect(resolve_url('login'))
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        print('user', user)
+        if user and user.is_active:
+            auth_login(request, user)
+            return redirect('/')
+    return render(request, 'shopping/login.html') #, {'form': LoginForm()})
 
 class Browse(TemplateView):
     template_name = 'shopping/browse.html'
