@@ -13,6 +13,8 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from rest_framework import viewsets
+from .serializer import ProdSerializer
 
 # Create your views here.
 def home(request):
@@ -104,3 +106,6 @@ class CustomerDeleteView(DeleteView):
     success_url = '/customer'
 
 
+class ProdViewsets(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProdSerializer

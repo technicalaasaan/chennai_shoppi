@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from shopping.urls import shoppy
 from shopping.views import home, login, logout, Browse, customer, customer_view, CustomerView, CustomerDeleteView, CustomerDetailView, CustomerListView, CustomerUpdateView
 
 urlpatterns = [
@@ -32,5 +34,7 @@ urlpatterns = [
     path('customer_entry/', customer_view),
     path('customer_add/', CustomerView.as_view()),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(shoppy.urls))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
